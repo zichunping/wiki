@@ -1,1 +1,644 @@
-My Page
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>DingTalk React API</title>
+
+    <link href="stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script src="javascripts/all.js" type="text/javascript"></script>
+
+      <script>
+        $(function() {
+          setupLanguages(["javascript"]);
+        });
+      </script>
+  </head>
+
+  <body class="index">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <img src="images/logo.png" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="javascript">javascript</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+        <ul class="toc-footer">
+            <li><a href='#'>注册钉钉开放平台</a></li>
+            <li><a href='http://www.dingtalk.com'>DingTalk</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        
+          <h1 id="开始">开始</h1>
+
+<h2 id="微应用配置，打包">微应用配置，打包</h2>
+
+<h2 id="sdk安装">sdk安装</h2>
+
+<h2 id="编写demo">编写Demo</h2>
+
+          <h1 id="apis">APIS</h1>
+
+<h2 id="lwhttp">LWHttp</h2>
+
+<blockquote>
+<p>示例:</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">LWHttp</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'../apis/LWHttp'</span><span class="p">);</span>
+
+<span class="nx">LWHttp</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'http://www.dingtalk.com/data?ss=1'</span><span class="p">,</span> <span class="s1">'json'</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+<span class="p">});</span>
+
+</code></pre>
+
+<p>请求网络数据只能使用该接口</p>
+
+<table><thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>描述</th>
+<th>必选</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>url</td>
+<td>string</td>
+<td>接口地址</td>
+<td>true</td>
+</tr>
+<tr>
+<td>responseType</td>
+<td>string</td>
+<td>返回类型</td>
+<td>true</td>
+</tr>
+<tr>
+<td>timeout</td>
+<td>int</td>
+<td>超时时间</td>
+<td>true</td>
+</tr>
+<tr>
+<td>callback</td>
+<td>object</td>
+<td>callback</td>
+<td>false</td>
+</tr>
+</tbody></table>
+
+<h2 id="lwurlutils">LWUrlUtils</h2>
+
+<blockquote>
+<p>示例:</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">LWUrlUtils</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'../apis/LWUrlUtils'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="nx">LWUrlUtils</span><span class="p">.</span><span class="nx">url</span><span class="p">(</span><span class="s1">'http://www.dingtalk.com/'</span><span class="p">,</span> <span class="s1">'login'</span><span class="p">,</span> <span class="p">{</span><span class="s1">'corpid'</span><span class="p">:</span> <span class="nx">corpid</span><span class="p">,</span> <span class="s1">'offset'</span><span class="p">:</span> <span class="nx">offset</span><span class="p">,</span> <span class="s1">'limit'</span><span class="p">:</span> <span class="nx">limit</span><span class="p">});</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">url</span><span class="p">);</span>
+</code></pre>
+
+<table><thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>描述</th>
+<th>必选</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>host</td>
+<td>string</td>
+<td>host</td>
+<td>true</td>
+</tr>
+<tr>
+<td>path</td>
+<td>string</td>
+<td>path</td>
+<td>true</td>
+</tr>
+<tr>
+<td>params</td>
+<td>object</td>
+<td>{&lsquo;corpid&rsquo;: corpid, &#39;offset&rsquo;: offset}</td>
+<td>false</td>
+</tr>
+<tr>
+<td>callback</td>
+<td>object</td>
+<td>callback</td>
+<td>false</td>
+</tr>
+</tbody></table>
+
+<h2 id="dtfetch">DTFetch</h2>
+
+<blockquote>
+<p>示例:</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">DTFetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'../../dtbizs/DTFetch'</span><span class="p">);</span>
+
+<span class="nx">DTFetch</span><span class="p">.</span><span class="nx">noticeList</span><span class="p">(</span><span class="s1">'QWESD'</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+<span class="p">});</span>
+
+
+<span class="nx">DTFetch</span><span class="p">.</span><span class="nx">noticeDetail</span><span class="p">(</span><span class="mi">1002</span><span class="p">,</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+<span class="p">});</span>
+
+</code></pre>
+
+<table><thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>描述</th>
+<th>必选</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">noticeList</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>corpid</td>
+<td>string</td>
+<td>企业ID</td>
+<td>true</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>int</td>
+<td>偏移</td>
+<td>true</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>int</td>
+<td>期望结果数量</td>
+<td>true</td>
+</tr>
+<tr>
+<td>callback</td>
+<td>object</td>
+<td>callback</td>
+<td>false</td>
+</tr>
+<tr>
+<td><code class="prettyprint">noticeDetail</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>参数</td>
+<td>类型</td>
+<td>描述</td>
+<td>必选</td>
+</tr>
+<tr>
+<td>bid</td>
+<td>int</td>
+<td>公告ID</td>
+<td>true</td>
+</tr>
+<tr>
+<td>callback</td>
+<td>object</td>
+<td>callback</td>
+<td>false</td>
+</tr>
+</tbody></table>
+
+<h2 id="dterror">DTError</h2>
+
+<blockquote>
+<p>示例:</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">DTError</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'../../dtbizs/DTError'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">error</span> <span class="o">=</span> <span class="nx">DTError</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">url</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">msg</span><span class="p">);</span>
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Code</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-2</td>
+<td>{&ldquo;url&rdquo;: &ldquo;http://gtms02.alicdn.com/tps/i2/TB1hgeNHFXXXXc_XFXXojIlUFXX-277-276.png&rdquo;, &ldquo;msg&rdquo;: &ldquo;对不起\n暂时没有公告&rdquo;}</td>
+</tr>
+<tr>
+<td>-1</td>
+<td>{&ldquo;url&rdquo;: &ldquo;http://gtms03.alicdn.com/tps/i3/TB1feeeHFXXXXbiXFXXTyVt9VXX-128-128.png&rdquo;, &ldquo;msg&rdquo;: &ldquo;加载失败\n点击屏幕重试&rdquo;}</td>
+</tr>
+<tr>
+<td>20016</td>
+<td>{&ldquo;url&rdquo;: &ldquo;http://gtms02.alicdn.com/tps/i2/TB1hgeNHFXXXXc_XFXXojIlUFXX-277-276.png&rdquo;, &ldquo;msg&rdquo;: &ldquo;对不起\n您暂无权限查看该页面&rdquo;}</td>
+</tr>
+</tbody></table>
+
+<h2 id="dtthirdpartyfetch">DTThirdPartyFetch</h2>
+
+<h2 id="dtthirdpartyerror">DTThirdPartyError</h2>
+
+          <h1 id="native-react">Native React</h1>
+
+<h2 id="约定">约定</h2>
+
+<p>color: <code class="prettyprint">5E97F6</code> <code class="prettyprint">FF5E97F6</code> <code class="prettyprint">0xFF5E97F6</code></p>
+
+<h2 id="显示页面">显示页面</h2>
+
+<blockquote>
+<p>示例:</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">DTNative</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'../apis/DTNative'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'action'</span><span class="p">:</span> <span class="s1">'show'</span><span class="p">,</span>
+  <span class="s1">'launchOptions'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">'bundleURL'</span><span class="p">:</span> <span class="s1">'https://app.dingtalk.com/blackboard/main.jsbundle'</span><span class="p">,</span>
+    <span class="s1">'moduleName'</span><span class="p">:</span> <span class="s1">'Notice'</span><span class="p">,</span>
+    <span class="s1">'title'</span><span class="p">:</span> <span class="s1">'DingTalk'</span><span class="p">,</span>
+    <span class="s1">'barTintColor'</span><span class="p">:</span> <span class="s1">'FF5E97F6'</span><span class="p">,</span>
+    <span class="s1">'tintColor'</span><span class="p">:</span> <span class="s1">'FFFFFFFF'</span><span class="p">,</span>
+    <span class="s1">'titleTextColor'</span><span class="p">:</span> <span class="s1">'FFFFFFFF'</span><span class="p">,</span>
+    <span class="s1">'leftButtonTitle'</span><span class="p">:</span> <span class="s1">'返回'</span><span class="p">,</span>
+    <span class="s1">'rightButtonTitle'</span><span class="p">:</span> <span class="s1">'更多'</span><span class="p">,</span>
+    <span class="s1">'onRightButtonPress'</span><span class="p">:</span> <span class="s1">'onRightButtonPress1'</span><span class="p">,</span>
+    <span class="s1">'statusBarStyleLightContent'</span><span class="p">:</span> <span class="s1">'true'</span><span class="p">,</span>
+    <span class="s1">'presentMode'</span><span class="p">:</span> <span class="s1">'true'</span><span class="p">,</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+<span class="nx">DTNative</span><span class="p">.</span><span class="nx">callWithOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+</code></pre>
+
+<table><thead>
+<tr>
+<th>参数</th>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>action</td>
+<td>show</td>
+<td>显示页面</td>
+</tr>
+<tr>
+<td>launchOptions</td>
+<td>object</td>
+<td>加载参数</td>
+</tr>
+</tbody></table>
+
+<table><thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>描述</th>
+<th>必选</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>bundleURL</td>
+<td>string</td>
+<td>网址</td>
+<td>true</td>
+</tr>
+<tr>
+<td>moduleName</td>
+<td>string</td>
+<td>导航栏标题</td>
+<td>true</td>
+</tr>
+<tr>
+<td>title</td>
+<td>string</td>
+<td>导航栏标题</td>
+<td>false</td>
+</tr>
+<tr>
+<td>barTintColor</td>
+<td>string</td>
+<td>导航栏背景颜色</td>
+<td>false</td>
+</tr>
+<tr>
+<td>tintColor</td>
+<td>string</td>
+<td>导航栏按钮颜色</td>
+<td>false</td>
+</tr>
+<tr>
+<td>titleTextColor</td>
+<td>string</td>
+<td>导航栏标题颜色</td>
+<td>false</td>
+</tr>
+<tr>
+<td>leftButtonTitle</td>
+<td>string</td>
+<td>导航栏左按钮文字</td>
+<td>false</td>
+</tr>
+<tr>
+<td>rightButtonTitle</td>
+<td>string</td>
+<td>导航栏右按钮文字</td>
+<td>false</td>
+</tr>
+<tr>
+<td>onRightButtonPress</td>
+<td>string</td>
+<td>导航栏右按钮事件标识</td>
+<td>false</td>
+</tr>
+<tr>
+<td>statusBarStyleLightContent</td>
+<td>bool</td>
+<td>设置白色状态栏</td>
+<td>false</td>
+</tr>
+<tr>
+<td>presentMode</td>
+<td>bool</td>
+<td>打开方式为push和present 默认push</td>
+<td>false</td>
+</tr>
+</tbody></table>
+
+<h2 id="关闭页面">关闭页面</h2>
+
+<blockquote>
+<p>示例:</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">DTNative</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'../apis/DTNative'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'action'</span><span class="p">:</span> <span class="s1">'dismiss'</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="nx">DTNative</span><span class="p">.</span><span class="nx">callWithOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+</code></pre>
+
+<table><thead>
+<tr>
+<th>参数</th>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>action</td>
+<td>dismiss</td>
+<td>关闭页面</td>
+</tr>
+</tbody></table>
+
+<h2 id="打开webview">打开WebView</h2>
+
+<blockquote>
+<p>示例:</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">DTNative</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'../apis/DTNative'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'action'</span><span class="p">:</span> <span class="s1">'browse'</span><span class="p">,</span>
+  <span class="s1">'launchOptions'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">'url'</span><span class="p">:</span> <span class="s1">'http://www.dingtalk.com/'</span><span class="p">,</span> 
+    <span class="s1">'title'</span><span class="p">:</span> <span class="s1">'DingTalk'</span><span class="p">,</span>
+    <span class="s1">'barTintColor'</span><span class="p">:</span> <span class="s1">'FF5E97F6'</span><span class="p">,</span>
+    <span class="s1">'tintColor'</span><span class="p">:</span> <span class="s1">'FFFFFFFF'</span><span class="p">,</span>
+    <span class="s1">'titleTextColor'</span><span class="p">:</span> <span class="s1">'FFFFFFFF'</span><span class="p">,</span>
+    <span class="s1">'leftButtonTitle'</span><span class="p">:</span> <span class="s1">'返回'</span><span class="p">,</span>
+    <span class="s1">'rightButtonTitle'</span><span class="p">:</span> <span class="s1">'更多'</span><span class="p">,</span>
+    <span class="s1">'onRightButtonPress'</span><span class="p">:</span> <span class="s1">'onRightButtonPress1'</span><span class="p">,</span>
+    <span class="s1">'statusBarStyleLightContent'</span><span class="p">:</span> <span class="s1">'true'</span><span class="p">,</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+<span class="nx">DTNative</span><span class="p">.</span><span class="nx">callWithOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+</code></pre>
+
+<p>使用原生WebView加载                        </p>
+
+<table><thead>
+<tr>
+<th>参数</th>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>action</td>
+<td>browse</td>
+<td>WebView</td>
+</tr>
+<tr>
+<td>launchOptions</td>
+<td>object</td>
+<td>加载参数</td>
+</tr>
+</tbody></table>
+
+<table><thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>描述</th>
+<th>必选</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>url</td>
+<td>string</td>
+<td>网址</td>
+<td>true</td>
+</tr>
+<tr>
+<td>title</td>
+<td>string</td>
+<td>导航栏标题</td>
+<td>false</td>
+</tr>
+<tr>
+<td>barTintColor</td>
+<td>string</td>
+<td>导航栏背景颜色</td>
+<td>false</td>
+</tr>
+<tr>
+<td>tintColor</td>
+<td>string</td>
+<td>导航栏按钮颜色</td>
+<td>false</td>
+</tr>
+<tr>
+<td>titleTextColor</td>
+<td>string</td>
+<td>导航栏标题颜色</td>
+<td>false</td>
+</tr>
+<tr>
+<td>leftButtonTitle</td>
+<td>string</td>
+<td>导航栏左按钮文字</td>
+<td>false</td>
+</tr>
+<tr>
+<td>rightButtonTitle</td>
+<td>string</td>
+<td>导航栏右按钮文字</td>
+<td>false</td>
+</tr>
+<tr>
+<td>onRightButtonPress</td>
+<td>string</td>
+<td>导航栏右按钮事件标识</td>
+<td>false</td>
+</tr>
+<tr>
+<td>statusBarStyleLightContent</td>
+<td>bool</td>
+<td>设置白色状态栏</td>
+<td>false</td>
+</tr>
+</tbody></table>
+
+<h2 id="公告模块">公告模块</h2>
+
+<blockquote>
+<p>示例:</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">DTNative</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'../apis/DTNative'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'action'</span><span class="p">:</span> <span class="s1">'show'</span><span class="p">,</span>
+  <span class="s1">'launchOptions'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">'corpid'</span><span class="p">:</span> <span class="s1">'qweasd'</span><span class="p">,</span> 
+    <span class="s1">'bundleURL'</span><span class="p">:</span> <span class="s1">'https://app.dingtalk.com/blackboard/main.jsbundle'</span><span class="p">,</span>
+    <span class="s1">'moduleName'</span><span class="p">:</span> <span class="s1">'Notice'</span><span class="p">,</span>
+    <span class="s1">'title'</span><span class="p">:</span> <span class="s1">'DingTalk'</span><span class="p">,</span>
+    <span class="s1">'barTintColor'</span><span class="p">:</span> <span class="s1">'FF5E97F6'</span><span class="p">,</span>
+    <span class="s1">'tintColor'</span><span class="p">:</span> <span class="s1">'FFFFFFFF'</span><span class="p">,</span>
+    <span class="s1">'titleTextColor'</span><span class="p">:</span> <span class="s1">'FFFFFFFF'</span><span class="p">,</span>
+    <span class="s1">'leftButtonTitle'</span><span class="p">:</span> <span class="s1">'返回'</span><span class="p">,</span>
+    <span class="s1">'statusBarStyleLightContent'</span><span class="p">:</span> <span class="s1">'true'</span><span class="p">,</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+<span class="nx">DTNative</span><span class="p">.</span><span class="nx">callWithOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+</code></pre>
+
+<table><thead>
+<tr>
+<th>参数</th>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>action</td>
+<td>pushVC</td>
+<td>pushViewController</td>
+</tr>
+<tr>
+<td>launchOptions</td>
+<td>object</td>
+<td>加载参数</td>
+</tr>
+</tbody></table>
+
+<table><thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>描述</th>
+<th>必选</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>corpid</td>
+<td>string</td>
+<td>企业ID</td>
+<td>true</td>
+</tr>
+<tr>
+<td>bundleURL</td>
+<td>string</td>
+<td>bundleURL</td>
+<td>true</td>
+</tr>
+<tr>
+<td>moduleName</td>
+<td>string</td>
+<td>模块名</td>
+<td>true</td>
+</tr>
+<tr>
+<td>title</td>
+<td>string</td>
+<td>导航栏标题</td>
+<td>false</td>
+</tr>
+<tr>
+<td>barTintColor</td>
+<td>string</td>
+<td>导航栏按钮颜色</td>
+<td>false</td>
+</tr>
+<tr>
+<td>tintColor</td>
+<td>string</td>
+<td>导航栏按钮颜色</td>
+<td>false</td>
+</tr>
+<tr>
+<td>titleTextColor</td>
+<td>string</td>
+<td>导航栏标题颜色</td>
+<td>false</td>
+</tr>
+<tr>
+<td>leftButtonTitle</td>
+<td>string</td>
+<td>导航栏左按钮文字</td>
+<td>false</td>
+</tr>
+<tr>
+<td>statusBarStyleLightContent</td>
+<td>bool</td>
+<td>设置白色状态栏</td>
+<td>false</td>
+</tr>
+</tbody></table>
+
+          <h1 id="web-react">Web React</h1>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="javascript">javascript</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
